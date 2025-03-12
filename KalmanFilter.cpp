@@ -50,7 +50,7 @@ double KalmanFilter::update(double newValue, double newRate)
     K_rate = newRate - K_bias;
     K_angle += dt * K_rate;
 
-    P[0][0] += dt * (P[1][1] + P[0][1]) + Q_angle * dt;
+    P[0][0] += dt * (dt * P[1][1] - P[0][1] - P[1][0] + Q_angle);
     P[0][1] -= dt * P[1][1];
     P[1][0] -= dt * P[1][1];
     P[1][1] += Q_bias * dt;
